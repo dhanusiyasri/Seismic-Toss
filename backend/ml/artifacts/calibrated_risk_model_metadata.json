@@ -1,0 +1,76 @@
+{
+  "training_rows": 18211,
+  "sources": [
+    "existing gateway simulator database",
+    "physics-informed synthetic sensor states"
+  ],
+  "purpose": "prototype scenario-consistent risk classification with held-out temperature calibration",
+  "features": [
+    "n1_tilt",
+    "n1_tilt_rate",
+    "n1_accel_deviation",
+    "n1_fsr",
+    "n1_fsr_change",
+    "n1_vibration_events",
+    "n1_tilt_rolling_mean",
+    "n1_tilt_rolling_std",
+    "n1_accel_deviation_rolling_mean",
+    "n1_accel_deviation_rolling_std",
+    "n1_fsr_rolling_std",
+    "n1_vibration_events_rolling_mean",
+    "n1_vibration_events_rolling_std",
+    "n2_tilt",
+    "n2_accel_deviation",
+    "n2_fsr",
+    "node_tilt_difference",
+    "node_accel_difference",
+    "node_fsr_difference",
+    "node_data_available"
+  ],
+  "model": "multiclass logistic regression + temperature scaling",
+  "metrics": {
+    "accuracy": 0.9928630249794126,
+    "balanced_accuracy": 0.9938130994366793,
+    "log_loss": 0.01890814285091737,
+    "calibration_log_loss": 0.02303897648160779,
+    "classification_report": {
+      "CRITICAL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1-score": 1.0,
+        "support": 657.0
+      },
+      "NORMAL": {
+        "precision": 0.9930257510729614,
+        "recall": 0.9930257510729614,
+        "f1-score": 0.9930257510729614,
+        "support": 1864.0
+      },
+      "WARNING": {
+        "precision": 0.9884135472370766,
+        "recall": 0.9884135472370766,
+        "f1-score": 0.9884135472370766,
+        "support": 1122.0
+      },
+      "accuracy": 0.9928630249794126,
+      "macro avg": {
+        "precision": 0.9938130994366793,
+        "recall": 0.9938130994366793,
+        "f1-score": 0.9938130994366793,
+        "support": 3643.0
+      },
+      "weighted avg": {
+        "precision": 0.9928630249794126,
+        "recall": 0.9928630249794126,
+        "f1-score": 0.9928630249794126,
+        "support": 3643.0
+      }
+    }
+  },
+  "calibration": {
+    "method": "scalar temperature scaling",
+    "temperature": 0.775
+  },
+  "runtime": "portable JSON coefficients; no sklearn pickle required",
+  "warning": "Metrics and calibration are against simulator/edge-risk labels, not field ground truth."
+}
